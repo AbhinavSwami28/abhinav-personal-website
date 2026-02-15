@@ -13,11 +13,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f172a;
-    --foreground: #f1f5f9;
-  }
+/* Class-based dark mode (controlled by next-themes) */
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
 }
 
 html {
@@ -36,10 +35,8 @@ body {
   border: 1px solid #e5e7eb;
 }
 
-@media (prefers-color-scheme: dark) {
-  .prose pre {
-    border-color: #374151;
-  }
+.dark .prose pre {
+  border-color: #374151;
 }
 
 .prose img {
@@ -90,17 +87,15 @@ body {
   border-radius: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  .adsense-placeholder {
-    background: repeating-linear-gradient(
-      45deg,
-      #1e293b,
-      #1e293b 10px,
-      #0f172a 10px,
-      #0f172a 20px
-    );
-    border-color: #475569;
-  }
+.dark .adsense-placeholder {
+  background: repeating-linear-gradient(
+    45deg,
+    #1e293b,
+    #1e293b 10px,
+    #0f172a 10px,
+    #0f172a 20px
+  );
+  border-color: #475569;
 }
 
 /* ── Admin markdown editor ── */

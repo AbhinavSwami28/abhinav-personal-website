@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, PenSquare } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -16,7 +17,15 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  flashlightActive: boolean;
+  onFlashlightToggle: (active: boolean) => void;
+}
+
+export default function Navbar({
+  flashlightActive,
+  onFlashlightToggle,
+}: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -52,23 +61,33 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <ThemeToggle
+              flashlightActive={flashlightActive}
+              onFlashlightToggle={onFlashlightToggle}
+            />
             <Link
               href="/admin"
-              className="ml-2 flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+              className="ml-1 flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
             >
               <PenSquare size={14} />
               Write
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: theme toggle + menu button */}
+          <div className="flex items-center gap-1 lg:hidden">
+            <ThemeToggle
+              flashlightActive={flashlightActive}
+              onFlashlightToggle={onFlashlightToggle}
+            />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-800 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
