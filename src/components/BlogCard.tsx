@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost, getCategoryInfo, calculateReadTime } from "@/lib/types";
+import { getThumbnailUrl } from "@/lib/image";
 import { format } from "date-fns";
 import { Clock, ArrowUpRight } from "lucide-react";
 
@@ -19,7 +20,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         <div className="relative h-32 sm:h-40 overflow-hidden">
           {post.cover_image ? (
             <Image
-              src={post.cover_image}
+              src={getThumbnailUrl(post.cover_image)}
               alt={post.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"

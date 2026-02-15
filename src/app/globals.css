@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tell Tailwind v4 to use class-based dark mode instead of prefers-color-scheme */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #111827;
@@ -25,6 +28,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Ensure sections with bg-white/dark:bg-slate-900 respond to theme toggle */
+.dark body {
+  color-scheme: dark;
 }
 
 /* ══════════════════════════════════════

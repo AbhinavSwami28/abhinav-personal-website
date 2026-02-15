@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getPostBySlug, getPostsByCategory } from "@/lib/posts";
 import { getCategoryInfo, calculateReadTime } from "@/lib/types";
+import { getHeaderUrl, getOgImageUrl } from "@/lib/image";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import ShareButtons from "@/components/ShareButtons";
 import BlogCard from "@/components/BlogCard";
@@ -33,13 +34,13 @@ export async function generateMetadata({
       description: post.excerpt,
       type: "article",
       publishedTime: post.created_at,
-      ...(post.cover_image && { images: [{ url: post.cover_image }] }),
+      ...(post.cover_image && { images: [{ url: getOgImageUrl(post.cover_image) }] }),
     },
     twitter: {
       card: post.cover_image ? "summary_large_image" : "summary",
       title: post.title,
       description: post.excerpt,
-      ...(post.cover_image && { images: [post.cover_image] }),
+      ...(post.cover_image && { images: [getOgImageUrl(post.cover_image)] }),
     },
   };
 }
@@ -68,7 +69,7 @@ export default async function PostPage({ params }: PostPageProps) {
         {post.cover_image ? (
           <>
             <Image
-              src={post.cover_image}
+              src={getHeaderUrl(post.cover_image)}
               alt={post.title}
               fill
               className="object-cover"
