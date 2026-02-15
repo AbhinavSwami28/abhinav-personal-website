@@ -61,13 +61,12 @@ export default function RootLayout({
           <AppShell>{children}</AppShell>
         </ThemeProvider>
 
-        {/* Google AdSense — loads on every page */}
+        {/* Google AdSense — must be beforeInteractive so the crawler sees it in raw HTML */}
         {adsenseClientId && (
           <Script
-            async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
+            strategy="beforeInteractive"
           />
         )}
       </body>
