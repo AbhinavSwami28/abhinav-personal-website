@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { CATEGORIES, type Category } from "@/lib/types";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { createPost } from "@/lib/posts";
+import { uploadImage } from "@/lib/storage";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import {
   Save,
@@ -13,22 +15,28 @@ import {
   AlertCircle,
   ArrowLeft,
   CheckCircle,
+  ImagePlus,
+  X,
+  Loader2,
 } from "lucide-react";
 import Link from "next/link";
 
 export default function WritePage() {
   const router = useRouter();
   const supabaseReady = isSupabaseConfigured();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [category, setCategory] = useState<Category>("coding");
   const [content, setContent] = useState("");
+  const [coverImage, setCoverImage] = useState("");
   const [published, setPublished] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   // Mobile: toggle between edit and preview
   const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
@@ -44,8 +52,42 @@ export default function WritePage() {
 
   const handleTitleChange = (value: string) => {
     setTitle(value);
-    // Auto-generate slug from title
     setSlug(generateSlug(value));
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      setError("Please select an image file (jpg, png, webp, etc.)");
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image must be under 5MB");
+      return;
+    }
+
+    setUploading(true);
+    setError("");
+
+    try {
+      const url = await uploadImage(file);
+      if (url) {
+        setCoverImage(url);
+      } else {
+        setError("Failed to upload image. Make sure Supabase is connected.");
+      }
+    } catch {
+      setError("Error uploading image.");
+    } finally {
+      setUploading(false);
+      // Reset file input
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
   };
 
   const handleSave = async () => {
@@ -72,6 +114,7 @@ export default function WritePage() {
         excerpt: excerpt.trim() || title.trim(),
         category,
         content,
+        cover_image: coverImage || undefined,
         published,
       });
 
@@ -164,6 +207,62 @@ export default function WritePage() {
             <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
           </div>
         )}
+
+        {/* Cover Image Upload */}
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Cover Image
+          </label>
+          {coverImage ? (
+            <div className="relative rounded-xl overflow-hidden border border-gray-300 dark:border-slate-700 bg-gray-100 dark:bg-slate-800">
+              <div className="relative h-48 sm:h-56">
+                <Image
+                  src={coverImage}
+                  alt="Cover preview"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <button
+                onClick={() => setCoverImage("")}
+                className="absolute top-3 right-3 p-1.5 rounded-lg bg-black/50 text-white hover:bg-black/70 transition-colors"
+                title="Remove image"
+              >
+                <X size={16} />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={uploading}
+              className="w-full py-8 rounded-xl border-2 border-dashed border-gray-300 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-600 bg-white dark:bg-slate-900 transition-colors flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400"
+            >
+              {uploading ? (
+                <>
+                  <Loader2 size={24} className="animate-spin text-indigo-500" />
+                  <span className="text-sm">Uploading...</span>
+                </>
+              ) : (
+                <>
+                  <ImagePlus size={24} />
+                  <span className="text-sm font-medium">
+                    Click to upload a cover image
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    JPG, PNG, or WebP — max 5MB
+                  </span>
+                </>
+              )}
+            </button>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="hidden"
+          />
+        </div>
 
         {/* Form Fields */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
@@ -264,7 +363,7 @@ export default function WritePage() {
               <textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder={`# Your Post Title\n\nStart writing your post in markdown...\n\n## Section Heading\n\nYour content here. You can use:\n- **Bold text**\n- *Italic text*\n- [Links](https://example.com)\n- \`inline code\`\n- Code blocks with triple backticks\n- Tables, lists, blockquotes, and more!`}
+                placeholder={`# Your Post Title\n\nStart writing your post in markdown...\n\n## Section Heading\n\nYour content here. You can use:\n- **Bold text**\n- *Italic text*\n- [Links](https://example.com)\n- \`inline code\`\n- Code blocks with triple backticks\n- Tables, lists, blockquotes, and more!\n\nTo add images in content, use:\n![Alt text](image-url-here)`}
                 className="flex-1 w-full p-4 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 resize-none focus:outline-none markdown-editor"
               />
             </div>

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getPostBySlug, getPostsByCategory } from "@/lib/posts";
 import { getCategoryInfo, calculateReadTime } from "@/lib/types";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import ShareButtons from "@/components/ShareButtons";
 import BlogCard from "@/components/BlogCard";
 import AdBanner from "@/components/AdBanner";
 import { format } from "date-fns";
@@ -31,6 +33,13 @@ export async function generateMetadata({
       description: post.excerpt,
       type: "article",
       publishedTime: post.created_at,
+      ...(post.cover_image && { images: [{ url: post.cover_image }] }),
+    },
+    twitter: {
+      card: post.cover_image ? "summary_large_image" : "summary",
+      title: post.title,
+      description: post.excerpt,
+      ...(post.cover_image && { images: [post.cover_image] }),
     },
   };
 }
@@ -54,10 +63,25 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div className="min-h-screen">
       {/* Post Header */}
-      <div
-        className={`bg-gradient-to-br ${category.gradient} relative overflow-hidden`}
-      >
-        <div className="absolute inset-0 bg-black/30" />
+      <div className="relative overflow-hidden">
+        {/* Background: cover image or gradient */}
+        {post.cover_image ? (
+          <>
+            <Image
+              src={post.cover_image}
+              alt={post.title}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/50" />
+          </>
+        ) : (
+          <>
+            <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient}`} />
+            <div className="absolute inset-0 bg-black/30" />
+          </>
+        )}
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <Link
             href={`/${post.category}`}
@@ -107,8 +131,13 @@ export default async function PostPage({ params }: PostPageProps) {
         {/* In-content Ad */}
         <AdBanner adFormat="rectangle" className="my-10" />
 
-        {/* Share & Navigation */}
+        {/* Share Buttons */}
         <div className="mt-10 pt-8 border-t border-gray-200 dark:border-slate-800">
+          <ShareButtons title={post.title} slug={post.slug} />
+        </div>
+
+        {/* Navigation */}
+        <div className="mt-6 pt-6 border-t border-gray-200 dark:border-slate-800">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <Link
               href={`/${post.category}`}

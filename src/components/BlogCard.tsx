@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BlogPost, getCategoryInfo, calculateReadTime } from "@/lib/types";
 import { format } from "date-fns";
 import { Clock, ArrowUpRight } from "lucide-react";
@@ -14,15 +15,26 @@ export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <article className="h-full flex flex-col rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-lg hover:border-gray-300 dark:hover:border-slate-700 transition-all duration-300">
-        {/* Gradient Header */}
-        <div
-          className={`h-32 sm:h-40 bg-gradient-to-br ${category.gradient} relative overflow-hidden`}
-        >
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-4 right-4 text-6xl sm:text-7xl opacity-50">
-              {category.icon}
+        {/* Cover Image or Gradient Header */}
+        <div className="relative h-32 sm:h-40 overflow-hidden">
+          {post.cover_image ? (
+            <Image
+              src={post.cover_image}
+              alt={post.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div
+              className={`w-full h-full bg-gradient-to-br ${category.gradient}`}
+            >
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-4 right-4 text-6xl sm:text-7xl opacity-50">
+                  {category.icon}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
           <div className="absolute top-4 left-4">
             <span
               className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/90 dark:bg-slate-900/90 ${category.color}`}
