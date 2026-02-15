@@ -143,9 +143,20 @@ export default function AboutPage() {
             {/* Education Details */}
             <div className="p-6 bg-white dark:bg-slate-900">
               <div className="flex items-start gap-4">
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
-                  <GraduationCap size={24} className="text-indigo-600 dark:text-indigo-400" />
-                </div>
+                <a
+                  href="https://www.bits-pilani.ac.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 w-14 h-14 rounded-xl overflow-hidden bg-white border border-gray-200 dark:border-slate-700 p-1.5 hover:shadow-md transition-shadow"
+                >
+                  <Image
+                    src="/bits-pilani-logo.png"
+                    alt="BITS Pilani Logo"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-contain"
+                  />
+                </a>
                 <div>
                   <h3 className="font-bold text-gray-900 dark:text-white text-lg">
                     Birla Institute of Technology and Science, Pilani
