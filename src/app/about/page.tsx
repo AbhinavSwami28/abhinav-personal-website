@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CATEGORIES } from "@/lib/types";
 import AdBanner from "@/components/AdBanner";
-import { Download, Github, Instagram, Linkedin, Mail, MapPin, Briefcase, GraduationCap, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Briefcase, GraduationCap, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Me",
@@ -251,15 +251,6 @@ export default function AboutPage() {
             >
               <Github size={16} />
               GitHub
-            </a>
-            <a
-              href="https://www.instagram.com/swami._.baba/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-800 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800 transition-all text-sm font-medium"
-            >
-              <Instagram size={16} />
-              Instagram
             </a>
           </div>
         </div>

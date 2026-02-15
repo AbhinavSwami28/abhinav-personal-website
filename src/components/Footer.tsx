@@ -117,16 +117,7 @@ export default function Footer() {
                   Email
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/swami._.baba/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
-                >
-                  Instagram
-                </a>
-              </li>
+              {/* Instagram removed */}
             </ul>
           </div>
         </div>

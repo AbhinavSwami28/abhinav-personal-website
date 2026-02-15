@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AdBanner from "@/components/AdBanner";
-import { Download, ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -102,12 +102,13 @@ export default function PortfolioPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
             <a
-              href="/Abhinav_Swami_Resume.pdf"
-              download
+              href="https://docs.google.com/document/d/1_blT56EpawZs4oJQv7wiDVuOxd7MTU9fm6q3clxEEsE/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-gray-900 font-medium hover:bg-gray-100 transition-colors"
             >
-              <Download size={16} />
-              Download Resume
+              <ExternalLink size={16} />
+              View Resume
             </a>
             <a
               href="https://github.com"
@@ -224,12 +225,13 @@ export default function PortfolioPage() {
               </p>
             </div>
             <a
-              href="/Abhinav_Swami_Resume.pdf"
-              download
+              href="https://docs.google.com/document/d/1_blT56EpawZs4oJQv7wiDVuOxd7MTU9fm6q3clxEEsE/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/25"
             >
-              <Download size={18} />
-              Download Resume
+              <ExternalLink size={18} />
+              View Resume
             </a>
           </div>
         </div>
