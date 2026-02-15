@@ -32,10 +32,12 @@ export const metadata: Metadata = {
     "blog",
   ],
   authors: [{ name: "Abhinav" }],
+  metadataBase: new URL("https://abhinav-swami.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Abhinav's Blog",
+    url: "https://abhinav-swami.vercel.app",
+    siteName: "Abhinav Swami",
   },
   robots: {
     index: true,
