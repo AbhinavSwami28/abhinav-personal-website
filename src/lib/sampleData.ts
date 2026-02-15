@@ -1,105 +1,27 @@
 import { BlogPost } from "./types";
 
+const IMG = "https://nctriqpghhrulpjmqubq.supabase.co/storage/v1/object/public/blog-images/covers";
+
 export const samplePosts: BlogPost[] = [
   // ── Reviews ──
   {
     id: "1",
-    title: "iPhone 16 Pro vs Samsung Galaxy S25 Ultra: The Ultimate Showdown",
-    slug: "iphone-16-pro-vs-samsung-galaxy-s25-ultra",
+    title: "iPhone 16 vs Google Pixel 9: The Definitive Verdict",
+    slug: "iphone-16-vs-google-pixel-9",
+    cover_image: `${IMG}/cover-iphone-vs-pixel.jpg`,
     excerpt:
-      "A comprehensive comparison of the two flagship smartphones — camera, performance, battery, and which one is actually worth your money.",
+      "I have a Pixel. My wife has an iPhone. After months of living with both, only one of us is happy. Spoiler: it's not me.",
     category: "reviews",
     published: true,
     created_at: "2026-02-10T10:00:00Z",
     updated_at: "2026-02-10T10:00:00Z",
-    content: `## The Flagship Battle of 2026
+    content: `## The Only Smartphone Comparison That Matters
 
-Every year, Apple and Samsung go head-to-head with their top-tier devices. This year is no different — but the gap is closer than ever.
+I own a Google Pixel 9. My wife owns an iPhone 16. We've been using them side by side for months. I've run benchmarks, compared cameras, tested battery life, analyzed the ecosystems, and after all that exhaustive research, I have reached one definitive conclusion:
 
-### Design & Build
+**The iPhone wins, because my wife said so.**
 
-The **iPhone 16 Pro** brings titanium frames and a slightly larger 6.3" display with ProMotion. Samsung counters with their **Galaxy S25 Ultra** featuring a titanium-armor frame and a gorgeous 6.9" Dynamic AMOLED display.
-
-Both feel premium, but Samsung edges ahead on screen real estate while Apple wins on compactness and one-handed use.
-
-### Camera System
-
-| Feature | iPhone 16 Pro | Galaxy S25 Ultra |
-|---------|--------------|-----------------|
-| Main | 48MP | 200MP |
-| Ultrawide | 48MP | 12MP |
-| Telephoto | 12MP (5x) | 50MP (5x) |
-| Video | 4K 120fps | 8K 30fps |
-
-Apple's computational photography remains king for **consistent, true-to-life shots**. Samsung's 200MP sensor captures insane detail but sometimes over-processes.
-
-### Performance
-
-- **iPhone 16 Pro**: A18 Pro chip — blazing fast, incredible efficiency
-- **Galaxy S25 Ultra**: Snapdragon 8 Elite — raw power monster
-
-In real-world use, both are overkill. You won't notice a difference scrolling Twitter.
-
-### Battery Life
-
-Samsung takes this one with its 5,000mAh battery lasting a solid day and a half. The iPhone 16 Pro improved significantly but still needs a top-up by evening for heavy users.
-
-### Verdict
-
-**Buy the iPhone 16 Pro if** you want the best camera consistency, ecosystem integration, and build quality.
-
-**Buy the Galaxy S25 Ultra if** you want the biggest screen, S Pen functionality, and maximum customization.
-
-Either way, you're getting an incredible phone. The real loser is your wallet.`,
-  },
-  {
-    id: "2",
-    title: "Best Mechanical Keyboards for Developers in 2026",
-    slug: "best-mechanical-keyboards-for-developers-2026",
-    excerpt:
-      "From budget picks to endgame boards — here are the keyboards that will make your code flow faster.",
-    category: "reviews",
-    published: true,
-    created_at: "2026-01-28T14:00:00Z",
-    updated_at: "2026-01-28T14:00:00Z",
-    content: `## Why Your Keyboard Matters
-
-As developers, we spend 8+ hours a day typing. A good mechanical keyboard isn't a luxury — it's an investment in your productivity and wrist health.
-
-### Top Picks
-
-#### 1. Keychron Q1 Pro — Best Overall ($180)
-
-The Q1 Pro hits the sweet spot. Gasket-mounted, hot-swappable, wireless, and sounds incredible out of the box. The aluminum build feels premium without breaking the bank.
-
-- **Switches**: Pre-lubed Gateron Jupiter Brown
-- **Layout**: 75%
-- **Connectivity**: Bluetooth 5.1 + USB-C
-- **Battery**: 4000mAh (lasts weeks)
-
-#### 2. HHKB Professional Hybrid — For the Purist ($280)
-
-The legendary Topre switches offer a typing experience nothing else can match. If you've never tried Topre, you're missing out.
-
-- **Layout**: 60% (HHKB layout)
-- **Switch**: 45g Topre
-- **The catch**: That layout takes a week to get used to
-
-#### 3. Nuphy Air75 V2 — Best Low-Profile ($110)
-
-Want mechanical feels without the height? The Air75 V2 is slim, wireless, and sounds surprisingly good for a low-profile board.
-
-### Switch Guide for Developers
-
-- **Linear (Red/Black)**: Smooth, no bump — great for fast typists
-- **Tactile (Brown)**: Slight bump — best for most developers
-- **Clicky (Blue)**: Loud click — your coworkers will hate you
-
-### My Daily Driver
-
-I've been using the **Keychron Q1 Pro** with Boba U4T switches for the past 6 months, and it's genuinely the best typing experience I've ever had. The thocky sound is addictive.
-
-> "A good keyboard doesn't make you a better programmer, but it makes you a happier one."`,
+> And if you're married, you already know — that's the only benchmark that matters.`,
   },
 
   // ── Geopolitics ──
@@ -107,6 +29,7 @@ I've been using the **Keychron Q1 Pro** with Boba U4T switches for the past 6 mo
     id: "3",
     title: "The Shifting Power Dynamics in the Indo-Pacific",
     slug: "shifting-power-dynamics-indo-pacific",
+    cover_image: `${IMG}/cover-indo-pacific.jpg`,
     excerpt:
       "How the Indo-Pacific region is becoming the center of global power — and why everyone should be paying attention.",
     category: "geopolitics",
@@ -146,6 +69,7 @@ We're witnessing a once-in-a-century power transition. It won't be smooth, but u
     id: "4",
     title: "Why Africa Is the Next Economic Frontier",
     slug: "africa-next-economic-frontier",
+    cover_image: `${IMG}/cover-africa-frontier.jpg`,
     excerpt:
       "The continent most investors ignore is quietly building the foundation for explosive growth.",
     category: "geopolitics",
@@ -195,6 +119,7 @@ Keep an eye on **Nigeria, Kenya, Rwanda, Ethiopia, and Ghana**. These are the on
     id: "5",
     title: "How I Built a Dividend Portfolio That Pays Monthly",
     slug: "dividend-portfolio-pays-monthly",
+    cover_image: `${IMG}/cover-dividend-portfolio.jpg`,
     excerpt:
       "A practical guide to building a dividend portfolio that generates passive income every single month.",
     category: "finance",
@@ -265,6 +190,7 @@ If you're starting from zero:
     id: "6",
     title: "Index Funds vs Individual Stocks: What I Learned After 5 Years",
     slug: "index-funds-vs-individual-stocks",
+    cover_image: `${IMG}/cover-index-vs-stocks.jpg`,
     excerpt:
       "After 5 years of doing both, here is my honest take on passive vs active investing for regular people.",
     category: "finance",
@@ -328,6 +254,7 @@ Set up automatic investments, stop checking your portfolio daily, and go live yo
     id: "7",
     title: "Building a Full-Stack App with Next.js and Supabase",
     slug: "full-stack-nextjs-supabase",
+    cover_image: `${IMG}/cover-nextjs-supabase.jpg`,
     excerpt:
       "A step-by-step guide to building a complete web app with Next.js, Supabase, and Tailwind CSS — all free.",
     category: "coding",
@@ -428,6 +355,7 @@ This is the stack I used to build this very blog. It's fast, free, and scales wh
     id: "8",
     title: "Why TypeScript Is Worth the Learning Curve",
     slug: "why-typescript-is-worth-it",
+    cover_image: `${IMG}/cover-typescript.jpg`,
     excerpt:
       "Coming from JavaScript, TypeScript felt like overkill. After 2 years, I can not imagine going back.",
     category: "coding",
