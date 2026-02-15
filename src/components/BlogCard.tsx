@@ -15,35 +15,42 @@ export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
       <article className="h-full flex flex-col rounded-2xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-lg hover:border-gray-300 dark:hover:border-slate-700 transition-all duration-300">
-        {/* Cover Image or Gradient Header */}
+        {/* Cover: image with gradient overlay, or plain gradient */}
         <div className="relative h-32 sm:h-40 overflow-hidden">
-          {post.cover_image ? (
+          {/* Background image (if available) */}
+          {post.cover_image && (
             <Image
               src={post.cover_image}
               alt={post.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
-          ) : (
-            <div
-              className={`w-full h-full bg-gradient-to-br ${category.gradient}`}
-            >
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-4 right-4 text-6xl sm:text-7xl opacity-50">
-                  {category.icon}
-                </div>
-              </div>
-            </div>
           )}
-          <div className="absolute top-4 left-4">
-            <span
-              className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/90 dark:bg-slate-900/90 ${category.color}`}
-            >
-              {category.label}
+
+          {/* Category gradient overlay — always shown */}
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${category.gradient} ${
+              post.cover_image ? "opacity-65" : "opacity-100"
+            } transition-opacity duration-300 group-hover:opacity-50`}
+          />
+
+          {/* Icon watermark (faded, behind text) */}
+          <div className="absolute inset-0">
+            <div className="absolute top-4 right-4 text-6xl sm:text-7xl opacity-20 text-white">
+              {category.icon}
+            </div>
+          </div>
+
+          {/* Category badge */}
+          <div className="absolute top-4 left-4 z-10">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-white/90 dark:bg-slate-900/90 shadow-sm backdrop-blur-sm">
+              <span className={category.color}>{category.label}</span>
             </span>
           </div>
-          <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-300">
+
+          {/* Arrow on hover */}
+          <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-300 shadow-sm">
               <ArrowUpRight size={16} />
             </span>
           </div>

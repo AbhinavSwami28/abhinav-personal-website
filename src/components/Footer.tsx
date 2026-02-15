@@ -126,12 +126,12 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://twitter.com"
+                  href="https://www.instagram.com/swami._.baba/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
                 >
-                  Twitter / X
+                  Instagram
                 </a>
               </li>
             </ul>
