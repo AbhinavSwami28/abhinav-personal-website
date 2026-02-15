@@ -52,8 +52,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Google AdSense Script — only loads when configured */}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+      >
+        <ThemeProvider>
+          <AppShell>{children}</AppShell>
+        </ThemeProvider>
+
+        {/* Google AdSense — loads on every page */}
         {adsenseClientId && (
           <Script
             async
@@ -62,13 +68,6 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         )}
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-      >
-        <ThemeProvider>
-          <AppShell>{children}</AppShell>
-        </ThemeProvider>
       </body>
     </html>
   );
