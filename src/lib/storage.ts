@@ -64,14 +64,21 @@ async function compressImage(file: File): Promise<{ blob: Blob; ext: string }> {
   });
 }
 
-export async function uploadImage(file: File): Promise<string | null> {
+/**
+ * Upload an image to Supabase Storage.
+ * If slug is provided, uses it as the filename (e.g., covers/my-post-slug.webp).
+ * Otherwise generates a random name.
+ */
+export async function uploadImage(file: File, slug?: string): Promise<string | null> {
   if (!isSupabaseConfigured() || !supabase) return null;
 
   try {
     // Compress the image before uploading
     const { blob, ext } = await compressImage(file);
 
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
+    const fileName = slug
+      ? `${slug}.${ext}`
+      : `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${ext}`;
     const filePath = `covers/${fileName}`;
 
     const { error } = await supabase.storage

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BlogPost, CATEGORIES, getCategoryInfo } from "@/lib/types";
+import AdminAuth from "@/components/AdminAuth";
 import { isSupabaseConfigured } from "@/lib/supabase";
 import { format } from "date-fns";
 import {
@@ -45,6 +46,7 @@ export default function AdminPage() {
   };
 
   return (
+    <AdminAuth>
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
@@ -226,5 +228,6 @@ export default function AdminPage() {
         </div>
       </div>
     </div>
+    </AdminAuth>
   );
 }

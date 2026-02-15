@@ -79,14 +79,7 @@ export default function Footer() {
                   Resume
                 </a>
               </li>
-              <li>
-                <Link
-                  href="/admin"
-                  className="text-sm text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
-                >
-                  Admin
-                </Link>
-              </li>
+              {/* Admin link hidden from public footer */}
             </ul>
           </div>
 

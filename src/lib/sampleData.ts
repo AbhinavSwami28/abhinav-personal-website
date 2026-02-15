@@ -8,7 +8,7 @@ export const samplePosts: BlogPost[] = [
     id: "1",
     title: "iPhone 16 vs Google Pixel 9: The Definitive Verdict",
     slug: "iphone-16-vs-google-pixel-9",
-    cover_image: `${IMG}/cover-iphone-vs-pixel.jpg`,
+    cover_image: `${IMG}/iphone-16-vs-google-pixel-9.jpg`,
     excerpt:
       "I have a Pixel. My wife has an iPhone. After months of living with both, only one of us is happy. Spoiler: it's not me.",
     category: "reviews",
@@ -29,7 +29,7 @@ I own a Google Pixel 9. My wife owns an iPhone 16. We've been using them side by
     id: "3",
     title: "The Shifting Power Dynamics in the Indo-Pacific",
     slug: "shifting-power-dynamics-indo-pacific",
-    cover_image: `${IMG}/cover-indo-pacific.jpg`,
+    cover_image: `${IMG}/shifting-power-dynamics-indo-pacific.jpg`,
     excerpt:
       "How the Indo-Pacific region is becoming the center of global power — and why everyone should be paying attention.",
     category: "geopolitics",
@@ -69,7 +69,7 @@ We're witnessing a once-in-a-century power transition. It won't be smooth, but u
     id: "4",
     title: "Why Africa Is the Next Economic Frontier",
     slug: "africa-next-economic-frontier",
-    cover_image: `${IMG}/cover-africa-frontier.jpg`,
+    cover_image: `${IMG}/africa-next-economic-frontier.jpg`,
     excerpt:
       "The continent most investors ignore is quietly building the foundation for explosive growth.",
     category: "geopolitics",
@@ -119,7 +119,7 @@ Keep an eye on **Nigeria, Kenya, Rwanda, Ethiopia, and Ghana**. These are the on
     id: "5",
     title: "How I Built a Dividend Portfolio That Pays Monthly",
     slug: "dividend-portfolio-pays-monthly",
-    cover_image: `${IMG}/cover-dividend-portfolio.jpg`,
+    cover_image: `${IMG}/dividend-portfolio-pays-monthly.jpg`,
     excerpt:
       "A practical guide to building a dividend portfolio that generates passive income every single month.",
     category: "finance",
@@ -190,7 +190,7 @@ If you're starting from zero:
     id: "6",
     title: "Index Funds vs Individual Stocks: What I Learned After 5 Years",
     slug: "index-funds-vs-individual-stocks",
-    cover_image: `${IMG}/cover-index-vs-stocks.jpg`,
+    cover_image: `${IMG}/index-funds-vs-individual-stocks.jpg`,
     excerpt:
       "After 5 years of doing both, here is my honest take on passive vs active investing for regular people.",
     category: "finance",
@@ -254,7 +254,7 @@ Set up automatic investments, stop checking your portfolio daily, and go live yo
     id: "7",
     title: "Building a Full-Stack App with Next.js and Supabase",
     slug: "full-stack-nextjs-supabase",
-    cover_image: `${IMG}/cover-nextjs-supabase.jpg`,
+    cover_image: `${IMG}/full-stack-nextjs-supabase.jpg`,
     excerpt:
       "A step-by-step guide to building a complete web app with Next.js, Supabase, and Tailwind CSS — all free.",
     category: "coding",
@@ -355,7 +355,7 @@ This is the stack I used to build this very blog. It's fast, free, and scales wh
     id: "8",
     title: "Why TypeScript Is Worth the Learning Curve",
     slug: "why-typescript-is-worth-it",
-    cover_image: `${IMG}/cover-typescript.jpg`,
+    cover_image: `${IMG}/why-typescript-is-worth-it.jpg`,
     excerpt:
       "Coming from JavaScript, TypeScript felt like overkill. After 2 years, I can not imagine going back.",
     category: "coding",

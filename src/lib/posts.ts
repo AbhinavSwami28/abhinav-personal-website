@@ -2,11 +2,20 @@ import { supabase, isSupabaseConfigured } from "./supabase";
 import { samplePosts } from "./sampleData";
 import { BlogPost, Category } from "./types";
 
-// Helper: merge Supabase posts with sample data (sample data fills gaps)
-function mergeWithSamples(dbPosts: BlogPost[]): BlogPost[] {
-  if (dbPosts.length > 0) return dbPosts;
-  // If no real posts yet, show sample data so the site isn't empty
-  return samplePosts.filter((p) => p.published);
+/**
+ * Merge Supabase posts with sample data.
+ * Real posts take precedence over sample posts with the same slug.
+ * This keeps the site full of content while you build up real posts.
+ */
+function mergeWithSamples(
+  dbPosts: BlogPost[],
+  filterFn?: (p: BlogPost) => boolean
+): BlogPost[] {
+  const dbSlugs = new Set(dbPosts.map((p) => p.slug));
+  const samples = samplePosts
+    .filter((p) => p.published && !dbSlugs.has(p.slug))
+    .filter(filterFn || (() => true));
+  return [...dbPosts, ...samples];
 }
 
 // ── Public queries ──
@@ -32,10 +41,11 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     return samplePosts.filter((p) => p.published);
   }
 
-  return mergeWithSamples(data || []).sort(
-    (a, b) =>
-      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  );
+  return mergeWithSamples(data || [])
+    .sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
 }
 
 export async function getPostsByCategory(
@@ -62,11 +72,7 @@ export async function getPostsByCategory(
     return samplePosts.filter((p) => p.published && p.category === category);
   }
 
-  const posts = data || [];
-  if (posts.length > 0) return posts;
-  // Fallback to sample posts for this category
-  return samplePosts
-    .filter((p) => p.published && p.category === category)
+  return mergeWithSamples(data || [], (p) => p.category === category)
     .sort(
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
