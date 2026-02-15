@@ -61,6 +61,19 @@ export default function RootLayout({
           <AppShell>{children}</AppShell>
         </ThemeProvider>
 
+        {/* Google Funding Choices — GDPR/EEA consent management */}
+        {adsenseClientId && (
+          <Script
+            src={`https://fundingchoicesmessages.google.com/i/${adsenseClientId}?ers=1`}
+            strategy="beforeInteractive"
+          />
+        )}
+        {adsenseClientId && (
+          <Script id="google-fc-init" strategy="beforeInteractive">
+            {`(function() {var a=window;var b="fc";function c(d){for(var e=0;e<d.length-1;e++){if(!a[d[e]]){return}}return a[d[e]]}a[b]=a[b]||{};a[b].callQueue=a[b].callQueue||[];a[b].callQueue.push(c)})();`}
+          </Script>
+        )}
+
         {/* Google AdSense — must be beforeInteractive so the crawler sees it in raw HTML */}
         {adsenseClientId && (
           <Script
