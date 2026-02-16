@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import ThemeProvider from "@/components/ThemeProvider";
 import AppShell from "@/components/AppShell";
 import Script from "next/script";
@@ -60,6 +61,8 @@ export default function RootLayout({
         <ThemeProvider>
           <AppShell>{children}</AppShell>
         </ThemeProvider>
+
+        <Analytics />
 
         {/* Google Funding Choices — GDPR/EEA consent management */}
         {adsenseClientId && (
