@@ -55,16 +55,14 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-      >
-        <ThemeProvider>
-          <AppShell>{children}</AppShell>
-        </ThemeProvider>
-
-        <Analytics />
-
-        {/* Google Funding Choices — GDPR/EEA consent management */}
+      <head>
+        {adsenseClientId && (
+          <Script
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
         {adsenseClientId && (
           <Script
             src={`https://fundingchoicesmessages.google.com/i/${adsenseClientId}?ers=1`}
@@ -76,15 +74,15 @@ export default function RootLayout({
             {`(function() {var a=window;var b="fc";function c(d){for(var e=0;e<d.length-1;e++){if(!a[d[e]]){return}}return a[d[e]]}a[b]=a[b]||{};a[b].callQueue=a[b].callQueue||[];a[b].callQueue.push(c)})();`}
           </Script>
         )}
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+      >
+        <ThemeProvider>
+          <AppShell>{children}</AppShell>
+        </ThemeProvider>
 
-        {/* Google AdSense — must be beforeInteractive so the crawler sees it in raw HTML */}
-        {adsenseClientId && (
-          <Script
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
-            crossOrigin="anonymous"
-            strategy="beforeInteractive"
-          />
-        )}
+        <Analytics />
       </body>
     </html>
   );
